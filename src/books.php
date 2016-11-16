@@ -48,9 +48,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
     $title = $conn->real_escape_string($put_vars['title']);
     $author = $conn->real_escape_string($put_vars['author']);
     $description = $conn->real_escape_string($put_vars['description']);
-    $book->setAuthor($put_vars['author']);
-    $book->setTitle($put_vars['title']);
-    $book->setDescription($put_vars['description']);
+    if ($title != "") {
+        $book->setTitle($put_vars['title']);
+    }
+    if ($author != "") {
+        $book->setAuthor($put_vars['author']);
+    }
+    if ($description != "") {
+        $book->setDescription($put_vars['description']);
+    }
     $book->update($conn);
     echo json_encode('edytowany');
     $conn->close();

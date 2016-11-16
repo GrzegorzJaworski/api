@@ -76,6 +76,7 @@ function bookDescription() {
                                         </label>\n\
                                       </form></p>";
                     var description = $("<p>Autor: " + json.author + "<br>\n\
+\n\                                         Opis: " + json.description + "<br>\n\
                                           " + editForm + "\n\
                                           <p class='hide' align='right'>Ukryj</p>");
 
