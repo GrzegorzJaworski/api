@@ -7,7 +7,7 @@ function addBook(event) {
     };
 
     $.ajax({
-        url: "src/books.php",
+        url: "app/books.php",
         data: postForm,
         type: "POST",
         dataType: "json"
@@ -32,9 +32,9 @@ function editBook(event) {
         author: $('.edit input[name=author]').val(),
         description: $('.edit textarea').val()
     };
-    
-     $.ajax({
-        url: "src/books.php",
+
+    $.ajax({
+        url: "app/books.php",
         data: postForm,
         type: "PUT",
         dataType: "json"
@@ -53,10 +53,10 @@ function editBook(event) {
 function bookDescription() {
     $(this).children().fadeIn('slow');
 //    Sprawdzam czy DIV został już załadowany
-    if ($(this).children()["0"].lastChild == $(this).children()["0"].firstChild) {
+    if ($(this).children()["0"].lastChild == null) {
 
         $.ajax({
-            url: "src/books.php",
+            url: "app/books.php",
             data: 'id=' + $(this).data('id'),
             type: "GET",
             dataType: "json"
@@ -75,7 +75,7 @@ function bookDescription() {
                                             <button  class='editButton' type = 'submit' > Dodaj </button>\n\
                                         </label>\n\
                                       </form></p>";
-                    var description = $("<p>Autor: " + json.author + "<br>\n\
+                    var description = $("<p>Opis:<br>Autor: " + json.author + "<br>\n\
 \n\                                         Opis: " + json.description + "<br>\n\
                                           " + editForm + "\n\
                                           <p class='hide' align='right'>Ukryj</p>");
@@ -100,7 +100,7 @@ function bookDescription() {
 
 function bookDelete() {
     $.ajax({
-        url: "src/books.php",
+        url: "app/books.php",
         data: 'id=' + $(this).val(),
         type: "DELETE",
         dataType: "json"
@@ -122,7 +122,7 @@ $(document).ready(function () {
     $('button').click(addBook);
 
     $.ajax({
-        url: "src/books.php",
+        url: "app/books.php",
         data: {},
         type: "GET",
         dataType: "json"
@@ -132,7 +132,7 @@ $(document).ready(function () {
                 var books = json;
 
                 $.each(books, function (id, title) {
-                    var book = $("<button type='button' 'name='id' value=" + id + ">Usuń</button><div class='" + title + "' data-id='" + id + "''>" + title + "<div class='description' style='border:1px solid black'>Opis:</div></div>");
+                    var book = $("<button type='button' 'name='id' value=" + id + ">Usuń</button><div class='" + title + "' data-id='" + id + "''>" + title + "<div class='description' style='border:1px solid black'></div></div>");
                     $('.books').append(book);
                 });
 
@@ -151,5 +151,3 @@ $(document).ready(function () {
             });
 
 });
-
-
